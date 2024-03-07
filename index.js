@@ -1,9 +1,3 @@
-//function that returns a bool value if a string is not a number
-function isNotNumber(char){
-    if(typeof char == 'number') return false;
-    return true;
-}
-
 //function that validates a password based on conditions
 function validatePassword(inputPass, checkPass) {
   if (inputPass != checkPass) return false;     //condition 1: strings are equal
@@ -14,8 +8,8 @@ function validatePassword(inputPass, checkPass) {
     let lowCheck = 0;
     for (let i = 0; i < inputPass.length; i++) {
       if (Number(inputPass[i]) == inputPass[i]) numCheck += 1;  //a number is found
-      else if (inputPass[i] == inputPass[i].toUpperCase() && isNotNumber(inputPass)) upCheck += 1;  //an uppercase character is found
-      else if (inputPass[i] == inputPass[i].toLowerCase() && isNotNumber(inputPass)) lowCheck += 1; //a lowercase character is found
+      else if (inputPass[i] == inputPass[i].toUpperCase()) upCheck += 1;  //an uppercase character is found
+      else if (inputPass[i] == inputPass[i].toLowerCase()) lowCheck += 1; //a lowercase character is found
     }
     if (!(numCheck && upCheck && lowCheck)) return false; //check if all conditions met
   }
@@ -34,11 +28,12 @@ function reverseString(inputPass) {
 //function to store password in a key-value pair object
 function storePassword(inputName, inputPass, checkPass) {
   var object = { name: inputName, newpassword: inputPass };
-  if (validatePassword(inputPass, checkPass)) {
+  if (validatePassword(inputPass, checkPass)) {// call validatePassword function
     object = { name: inputName, newpassword: reverseString(inputPass) };
   }
   return object;
 }
 
+//Function calls
 console.log(storePassword("John", "Pass1234", "Pass1234"));
 console.log(storePassword("John", "Pass123", "Pass12345"));
